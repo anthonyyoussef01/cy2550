@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+import argparse
+
+from random_word import RandomWords
+r = RandomWords()
+
+from chance import chance
+
+from random import randrange
+import random
+
+def run(args):
+    words = args.words     # default is 4
+    caps = args.caps       # default is 0
+    numbers = args.numbers # default is 0
+    symbols = args.symbols # default is 0
+    
+    f = open("3000common.txt", "r")
+
+    all_words = []
+    for line in f:
+        stripped_line = line.strip()
+        all_words.append(stripped_line)
+
+    f.close()
+    
+    #password_list = r.get_random_words(limit=words)
+    password_list = []
+    for i in range(0,words):
+        password_list.append(random.choice(all_words))
+    
+    if (any('-' in string for string in password_list)):
+        new_strings = []
+        
+        for n, string in enumerate(password_list):
+            if '-' in string or ' ' in string:
+                new_word = r.get_random_word()
+                while '-' in new_word or ' ' in new_word:
+                    new_word = r.get_random_word
+                password_list[n] = new_word
+    
+    #print(password_list)
+    
+    if caps==0 and numbers==0 and symbols==0:
+        res = ''.join(password_list)
+        print(res)
+        return res
+    
+    else:
+        password = ''
+        
+        if caps > 0:
+            i = 0
+            for word in password_list:
+                if i < caps:
+                    word = word.capitalize()
+                    i += 1
+                password += word
+        else:
+            password = password.join(password_list)
+            
+        if numbers > 0:
+            for i in range(0, symbols):
+                loc = randrange(len(password)+1)
+                password = password[:loc] + str(randrange(10)) + password[loc:]
+        
+        if symbols > 0:
+            lst = ['!','@','#','$','%','^','&','*','(',')','_','-','+','=',
+                   '{','[','}',']',':',';','"','\'','<',',','>','.','?','/',
+                   '|','\\']
+            for i in range(0, symbols):
+                loc = randrange(len(password)+1)
+                password = password[:loc] + chance.pickone(lst) + password[loc:]
+        
+        print(password)
+        return password
+
+#print(run(words=1, caps=3, numbers=1, symbols=20))
+
+def main():
+    parser=argparse.ArgumentParser(description="Generate a secure, memorable password using the XKCD method")
+    parser.add_argument("-w", "--words", help="include WORDS words in the password (default=4)", dest="words", type=int, default=4)
+    parser.add_argument("-c", "--caps", help="capitalize the first letter of CAPS random words (default=0)", dest="caps", type=int, default=0)
+    parser.add_argument("-n", "--numbers", help="insert NUMBERS random numbers in the password (default=0)", dest="numbers", type=int, default=0)
+    parser.add_argument("-s", "--symbols", help="insert SYMBOLS random symbols in the password (default=0)", dest="symbols", type=int, default=0)
+    parser.set_defaults(func=run)
+    args=parser.parse_args()
+    args.func(args)
+
+if __name__=="__main__":
+    main()
