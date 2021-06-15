@@ -1,19 +1,18 @@
 # Last Modified: Mon Jun 14 18:40:45 2021
-abi <abi/3.0>,
-include <tunables/global>
-/home/anthony/p2 {
+#include <tunables/global>
+/home/anthony/p2 flags=(audit) {
   #include <abstractions/base>
   #include <abstractions/user-tmp>
   network tcp,
-  /var/log/syslog r,
-  /etc/timezone r,
-  /proc/uptime r,
-  /etc/hostid r,
-  /etc/passwd r,
-  /etc/hosts r,
-  /home/anthony/template r,
-  home/anthony/p2 mr,
-  /syskernel/mm/transparent_hugepage/hpage_pmd_size r,
-  @{HOME}/ r,  
-  owner /home/*/.project2/config w,
+  /home/anthony/p2 mr,
+  /home/anthony/.project2/config rwm,
+  /var/log/syslog rw,
+  /etc/timezone rw,
+  /proc/uptime rw,
+  /etc/hostid rw,
+  /etc/passwd rw,
+  /etc/hosts rw,
+  /home/anthony/template rwm,
+  deny @{PROC}/meminfo r,
+  deny @{PROC}/stat r,
 }
