@@ -1,8 +1,6 @@
 # Last Modified: Mon Jun 14 18:40:45 2021
-
 abi <abi/3.0>,
 include <tunables/global>
-
 /home/anthony/p2 {
   #include <abstractions/base>
   #include <abstractions/user-tmp>
