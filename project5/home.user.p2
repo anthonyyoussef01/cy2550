@@ -13,7 +13,7 @@ include <tunables/global>
   /etc/hosts r,
   /home/anthony/template r,
   home/anthony/p2 mr,
-  /syskernel/mm/transparent_hpage_pmd_size r,
-  @{home}/ r,  
+  /syskernel/mm/transparent_hugepage/hpage_pmd_size r,
+  @{HOME}/ r,  
   owner /home/*/.project2/config w,
 }
