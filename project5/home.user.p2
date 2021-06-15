@@ -3,10 +3,10 @@
 /home/anthony/p2 flags=(audit) {
   #include <abstractions/base>
   #include <abstractions/user-tmp>
+  /var/log/syslog rw,
   network tcp,
   /home/anthony/p2 mr,
   /home/anthony/.project2/config rwm,
-  /var/log/syslog rw,
   /etc/timezone rw,
   /proc/uptime rw,
   /etc/hostid rw,
