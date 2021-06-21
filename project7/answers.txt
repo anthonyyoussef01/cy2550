@@ -1,0 +1,6 @@
+evilscript.php
+21/Jun/2021:19:33/25 +0000
+Mon Jun 21 19:30:32.531879 2021
+/etc/shadow
+
+/usr/bin/yes
